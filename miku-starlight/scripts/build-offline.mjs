@@ -1,0 +1,14 @@
+import { build } from 'vite';
+import { readFile,writeFile,mkdir } from 'node:fs/promises';
+import { resolve,dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
+const asset=await readFile(resolve(root,'public/assets/miku/miku-performance.png'));
+const result=await build({root,configFile:false,publicDir:false,define:{__MIKU_PERFORMANCE__:JSON.stringify(`data:image/png;base64,${asset.toString('base64')}`)},build:{write:false,target:'es2022',sourcemap:false,rollupOptions:{input:resolve(root,'src/main.js'),output:{inlineDynamicImports:true}}}});
+const outputs=(Array.isArray(result)?result:[result]).flatMap(r=>r.output);if(outputs.length!==1||outputs[0].type!=='chunk')throw new Error('Offline scene must be a single complete bundle.');
+const favicon=await readFile(resolve(root,'public/favicon.svg'));const template=await readFile(resolve(root,'index.html'),'utf8');
+const code=outputs[0].code.replace(/<\/script/gi,'<\\/script');
+const html=template.replace('href="/favicon.svg"',`href="data:image/svg+xml;base64,${favicon.toString('base64')}"`).replace('<script type="module" src="/src/main.js"></script>',()=>`<script type="module">${code}</script>`);
+await mkdir(resolve(root,'offline'),{recursive:true});await writeFile(resolve(root,'offline/双击打开初音星光演唱会.html'),html,'utf8');
+await writeFile(resolve(root,'offline/先读我.txt'),'\uFEFFMIKU · STARLIGHT 初音未来星光演唱会\r\n\r\n解压后双击“ 双击打开初音星光演唱会.html ”即可观看。\r\n不需要安装软件、输入命令或联网。建议使用较新的 Edge 或 Chrome。\r\n\r\n鼠标拖动旋转，滚轮缩放；触屏拖动及双指缩放。\r\n左上角切换“日间彩排 / 星光现场 / 返场”。\r\n伴奏默认关闭，点击“伴奏”可开启原创合成器伴奏。\r\n\r\nHTML 已内含程序和人物图集，可单独转发。\r\n','utf8');
+console.log('Offline concert built.');

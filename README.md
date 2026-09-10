@@ -9,6 +9,9 @@
 | 场景 | 内容 | 制作提示词 |
 | --- | --- | --- |
 | [博丽神社 · 幻想乡庭院](hakurei-shrine/) | 半写实三渲二神社、昼夜切换、茂密庭院、像素灵梦扫地与跳跃 | [完整复刻提示词](hakurei-shrine/RECREATE_PROMPT.md) |
+| [MIKU · STARLIGHT 星光演唱会](miku-starlight/) | 环形 LED 舞台、T 台、独立演唱姿态、荧光棒观众、同步灯光与可选原创伴奏 | [完整复刻提示词](miku-starlight/RECREATE_PROMPT.md) |
+
+![初音未来星光演唱会](miku-starlight/previews/live.png)
 
 ![博丽神社白昼](hakurei-shrine/previews/final-scene.png)
 
@@ -16,7 +19,7 @@
 
 ## 不用命令，直接体验
 
-在仓库的 **Releases** 中下载「博丽神社-双击即看.zip」，解压后双击 **双击打开博丽神社.html**。使用较新的 Edge 或 Chrome 即可，不需要安装依赖，也不需要联网。
+在仓库的 **Releases** 中下载对应场景的「双击即看.zip」，解压后双击里面的 HTML。使用较新的 Edge 或 Chrome 即可，不需要安装依赖，也不需要联网。初音演唱会的伴奏默认关闭，可手动开启。
 
 直接下载源码时，各场景的 `offline/` 目录也包含可独立打开的 HTML。GitHub 的文件预览页不会直接运行 HTML，需要先下载到电脑。
 
@@ -49,6 +52,7 @@ threejs-scenes/
 │  ├─ tests/
 │  ├─ RECREATE_PROMPT.md      # 无需聊天历史的完整制作提示词
 │  └─ README.md
+├─ miku-starlight/            # 初音未来星光演唱会
 └─ another-scene/             # 后续场景同级添加
 ```
 

@@ -1,0 +1,19 @@
+# Generated dependencies, builds and temporary verification output
+**/node_modules/
+**/dist/
+**/.playwright-cli/
+**/test-results/
+**/playwright-report/
+**/.vite/
+*.log
+
+# Distributable archives are uploaded to Releases instead of versioned twice
+*.zip
+
+# Local machine secrets and OS files
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+desktop.ini
